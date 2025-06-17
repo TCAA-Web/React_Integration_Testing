@@ -27,8 +27,6 @@ function App() {
 
   const handleFormInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { value, name } = event.target
-    console.log(value, name)
-    console.log(formState)
     setFormState((prev) => ({ ...prev, [name]: value }))
   }
 
