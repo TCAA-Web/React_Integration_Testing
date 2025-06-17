@@ -27,14 +27,14 @@ export const ImageSlider = ({ imageGallery }: ImageSliderInterface) => {
 
   return (
     <section className='w-60 gap-2 flex justify-center items-center m-1'>
-      <Button callback={prevHandler} aria='previous-button'>
+      <Button id='prevButton' callback={prevHandler} aria='previous-button'>
         Back
       </Button>
       <figure className='w-fit h-auto'>
         <img className='object-cover h-90 max-w-lg' src={currentImage.imgSrc} alt={currentImage.name}></img>
         <figcaption className='font-extralight text-sm'>{currentImage.name}</figcaption>
       </figure>
-      <Button callback={nextHandler} aria='next-button'>
+      <Button id='nextButton' callback={nextHandler} aria='next-button'>
         Forward
       </Button>
     </section>
