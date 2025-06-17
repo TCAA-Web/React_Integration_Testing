@@ -32,13 +32,17 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (formState.name === '' || formState.name === undefined || formState.image === '') {
+    if (
+      formState.name === '' ||
+      formState.name === 'Enter your name' ||
+      formState.name === undefined ||
+      formState.image === ''
+    ) {
       setError('Please fill out your name and select a favorite image')
     } else {
       openModal()
     }
   }
-
   return (
     <MainLayout>
       <Heading aria-label='heading'>Pick the image you like the most</Heading>
