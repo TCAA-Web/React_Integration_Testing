@@ -9,11 +9,21 @@ import type { FormFieldType, formValueType } from './types/FormTypes'
 import { formFieldsInit } from './static/formFieldsInit'
 import { Select } from './components/Select'
 import { capitalizeFirstLetter } from './utils/capitalizeFirstLetter'
+import Modal from 'react-modal'
 
 function App() {
   const initialState: formValueType = { name: 'Enter your name', age: 0, image: '' }
-
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const [formState, setFormState] = useState<formValueType>(initialState)
+  const [error, setError] = useState<string>('')
+
+  function openModal() {
+    setModalIsOpen(true)
+  }
+
+  function closeModal() {
+    setModalIsOpen(false)
+  }
 
   const handleFormInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { value, name } = event.target
@@ -24,7 +34,11 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    alert(`${formState.name}, du har valgt ${formState.image} som dit billede.`)
+    if (formState.name === '' || formState.name === undefined || formState.image === '') {
+      setError('Please fill out your name and select a favorite image')
+    } else {
+      openModal()
+    }
   }
 
   return (
@@ -59,6 +73,12 @@ function App() {
           }
         })}
       </Form>
+      {error && <b>{error}</b>}
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel='Succes Modal'>
+        <p>
+          {formState.name}, du har valgt {formState.image} som dit billede.
+        </p>
+      </Modal>
     </MainLayout>
   )
 }
